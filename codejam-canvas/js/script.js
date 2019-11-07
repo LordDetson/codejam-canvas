@@ -18,6 +18,7 @@ function draw4x4() {
         }
         y += heightRect;
     }
+    active(btnDraw4x4);
 }
 
 function draw32x32() {
@@ -36,13 +37,29 @@ function draw32x32() {
         }
         y += heightRect;
     }
+    active(btnDraw32x32);
 }
 
 function drawImage() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(document.getElementById("image"), 0, 0, canvas.width, canvas.height);
+    active(btnDrawImage);
 }
 
+function active(btn) {
+    if (activeBtn) {
+        activeBtn.className = btnClass;
+    }
+    btn.className = btnActiveClass;
+    activeBtn = btn;
+}
+
+const btnActiveClass = "list-group-item list-group-item-action active";
+const btnClass = "list-group-item list-group-item-action";
+const btnDraw4x4 = document.getElementById('draw4x4');
+const btnDraw32x32 = document.getElementById('draw32x32');
+const btnDrawImage = document.getElementById('drawImage');
+let activeBtn;
 const matrix4x4 = '[["00BCD4", "FFEB3B","FFEB3B","00BCD4"], ["FFEB3B", "FFC107","FFC107","FFEB3B"], ["FFEB3B", "FFC107","FFC107","FFEB3B"], ["00BCD4", "FFEB3B","FFEB3B","00BCD4"]]';
 const matrix32x32 = '[' +
     '  [' +
