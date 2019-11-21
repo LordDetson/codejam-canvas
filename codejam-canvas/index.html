@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/colorPicker.css">
+    <script src="js/colorpicker.min.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
     <title>Canvas</title>
@@ -125,6 +127,22 @@
         </section>
     </article>
 </main>
+<div id="color-picker" class="cp-default">
+    <div class="picker-wrapper">
+        <div id="picker" class="picker"></div>
+        <div id="picker-indicator" class="picker-indicator"></div>
+    </div>
+    <div class="pcr-wrapper">
+        <div id="pcr" class="pcr"></div>
+        <div id="pcr-indicator" class="pcr-indicator"></div>
+    </div>
+    <ul id="color-values">
+        <li><label>RGB:</label><span id="rgb"></span></li>
+        <li><label>HSV:</label><span id="hsv"></span></li>
+        <li><label>HEX:</label><span id="hex"></span></li>
+        <li><div id="pcr_bg"></div></li>
+    </ul>
+</div>
 <footer></footer>
 <div style="display:none;">
     <img id="image" src="data/image.png">
