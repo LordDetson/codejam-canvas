@@ -5,6 +5,13 @@ class PixelCanvas {
         this.context = canvas.getContext('2d');
         this.setAmountPixels(4);
         this.colorMenu = colorMenu;
+
+        this.canvas.addEventListener("mousemove", event => {
+            localStorage.setItem("canvasData", JSON.stringify(this.createData()));
+        });
+        if (localStorage.getItem("canvasData")) {
+            this.drawByData(JSON.parse(localStorage.getItem("canvasData")));
+        }
     }
 
     setAmountPixels(amountPixels) {
@@ -25,7 +32,8 @@ class PixelCanvas {
     }
 
     clearCanvas() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.width);
+        this.context.fillStyle = "#FFFFFF";
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.width);
     }
 
     getColorByPoint(x, y) {
@@ -41,6 +49,31 @@ class PixelCanvas {
         let row = Math.floor(e.offsetX / this.pixelSize);
         let col = Math.floor(e.offsetY / this.pixelSize);
         return this.createPositionByRowAndCol(row, col);
+    }
+
+    createData() {
+        let size = this.amountPixels;
+        let data = new Array(size);
+        for (let i = 0, y = 0; i < size; i++) {
+            data[i] = new Array(size);
+            for (let j = 0, x = 0; j < size; j++) {
+                data[i][j] = this.getColorByPoint(x, y);
+                x += this.pixelSize;
+            }
+            y += this.pixelSize;
+        }
+        return data;
+    }
+
+    drawByData(data) {
+        for (let i = 0, y = 0; i < data.length; i++) {
+            for (let j = 0, x = 0; j < data[i].length; j++) {
+                this.context.fillStyle = data[i][j];
+                this.context.fillRect(x, y, this.pixelSize, this.pixelSize);
+                x += this.pixelSize;
+            }
+            y += this.pixelSize;
+        }
     }
 }
 
@@ -93,7 +126,6 @@ class ColorMenu {
     }
 
     setCurrentColor(color) {
-        console.log(color);
         this.prevColor = this.curColor;
         this.curColor = color;
         this.svgCurColor.style.fill = this.curColor;
@@ -223,4 +255,9 @@ function activeBtnSize(btn) {
     activeBtn = btn;
 }
 
-size4x4();
+function fun() {
+
+}
+
+activeBtn = document.getElementById("size4x4");
+document.getElementById("size4x4").className = toolsMenu.btnActiveClass;
